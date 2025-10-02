@@ -7,6 +7,8 @@ import woowacourse.payments.domain.Card
 import woowacourse.payments.domain.CardNumber
 import woowacourse.payments.domain.CardPassword
 import woowacourse.payments.domain.CardsRepository
+import woowacourse.payments.view.toUiModel
+import woowacourse.payments.view.ui.model.CardUiModel
 import java.time.YearMonth
 
 class CardsStateHolderTest {
@@ -52,6 +54,10 @@ class CardsStateHolderTest {
 
         // then
         val new: CardsUiState = stateHolder.uiState
-        assertThat(new).isNotEqualTo(old)
+
+        val actual: List<CardUiModel> = new.cards
+        val expected: List<CardUiModel> = listOf(newCard.toUiModel())
+
+        assertThat(actual).isEqualTo(expected)
     }
 }
